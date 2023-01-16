@@ -19,7 +19,7 @@ let board = [
 const handleClick = (element) => {
   const row = parseInt(element.id.charAt(0))
   const column = parseInt(element.id.charAt(2))
-  board [row][column] = currentMarker;
+  board [row][column] = currentMarker; // may be move this under line 25
   // check to see if the square clicked has anything in it, if not continue
   // this prevents an X being changed to an O
   if(!document.getElementById(element.id).innerHTML){
@@ -64,7 +64,8 @@ const checkForWin = () => {
     window.alert(`Player ${currentMarker} won!`)
   } else {
     // if no win, change the marker from X to O, or O to X for the next player.
-    changeMarker(window.alert(`Player ${currentMarker} try again!`))
+    changeMarker()
+    console.log("Current player is now - ", currentMarker)
   }
 }
 
@@ -91,8 +92,8 @@ const verticalWin = () => {
     (board [0][0] == 'O' && board [1][0] == 'O' && board [2][0] == 'O') ||
     (board [0][1] == 'X' && board [1][1] == 'X' && board [2][1] == 'X') ||
     (board [0][1] == 'O' && board [1][1] == 'O' && board [2][1] == 'O') ||
-    (board [0][2] == 'X' && board [2][1] == 'X' && board [2][2] == 'X') ||
-    (board [0][2] == 'O' && board [2][1] == 'O' && board [2][2] == 'O')
+    (board [0][2] == 'X' && board [1][2] == 'X' && board [2][2] == 'X') ||
+    (board [0][2] == 'O' && board [1][2] == 'O' && board [2][2] == 'O')
   ) {
     return true;
   } else {
@@ -120,6 +121,12 @@ const changeMarker = () => {
 }
 
 const resetBoard = () => {
+  board = [
+    ['','',''],
+    ['','',''],
+    ['','','']
+  ];
+  
   // sanity check: this tells us the function is being called
   console.log("the board was cleared!")
 
